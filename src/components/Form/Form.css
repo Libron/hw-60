@@ -8,10 +8,11 @@ form {
     width: 40%;
     color: #fff;
 }
-form input {
-    padding: 5px 10px;
+
+form label {
+    margin-right: 5px;
 }
-
-form #author {
-
+form input {
+    margin-right: 20px;
+    padding: 5px 10px;
 }

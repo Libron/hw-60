@@ -46,12 +46,12 @@ class App extends Component {
         this.interval = setInterval(() => {
             this.getNewMessages()
         }, 3000);
-        console.log('Interval:', this.interval);
+        console.log('[Interval:]', this.interval);
     };
 
     componentWillUnmount() {
         clearInterval(this.interval)
-    }
+    };
 
     publishMessage = (formData) => {
         const data = new URLSearchParams();
@@ -60,7 +60,11 @@ class App extends Component {
         fetch(this.endpointURL, {
            method: 'POST',
            body: data,
-        }).then(console.log('New message published'));
+        }).then(response => {
+            if (response.ok) {
+                console.log('New message published');
+            }
+        });
     };
 
   render() {
