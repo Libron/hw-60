@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Form from "./components/Form/Form";
 import ChatBox from "./components/ChatBox/ChatBox";
 
@@ -13,12 +12,9 @@ class App extends Component {
     interval = null;
 
     getNewMessages(datetime = this.state.datetime) {
-        console.log('[Method] getNewMessages()');
         let url = this.endpointURL;
         if (datetime !== null) {
             url = this.endpointURL + '?datetime=' + datetime;
-            console.log('[Datetime]', datetime);
-            console.log('[URL]', url);
         }
 
         fetch(url).then(response => {
@@ -27,18 +23,13 @@ class App extends Component {
             }
             throw new Error('Request failed');
         }).then(result => {
-            console.log('[Result]', result);
             if (result.length !== 0) {
-                console.log('[DATA]', result);
-                const messages = [
-                    ...this.state.messages,
-                    ...result
-                ];
+                let newData = [...result];
+                newData = newData.reverse();
+                const messages = newData.concat(this.state.messages);
                 const datetime = result[result.length - 1].datetime;
                 this.setState({messages, datetime});
             }
-
-            console.log('[State]', this.state.messages);
         });
     };
 
@@ -46,7 +37,6 @@ class App extends Component {
         this.interval = setInterval(() => {
             this.getNewMessages()
         }, 3000);
-        console.log('[Interval:]', this.interval);
     };
 
     componentWillUnmount() {
