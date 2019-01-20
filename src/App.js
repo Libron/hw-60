@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Form from "./components/Form/Form";
 import ChatBox from "./components/ChatBox/ChatBox";
 
+import './App.css';
+
 class App extends Component {
     state = {
         messages: [],
